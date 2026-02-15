@@ -3,14 +3,14 @@ pre-commit:
   commands:
     format-check:
       glob: '*.{ts,tsx,js,json}'
-      run: oxfmt --check {staged_files}
+      run: oxfmt {staged_files}
     lint:
       glob: '*.{ts,tsx}'
       run: oxlint {staged_files}
     rust-fmt:
       root: 'src-tauri/'
       glob: '*.rs'
-      run: cargo fmt --check
+      run: cargo fmt
 
 pre-push:
   commands:
