@@ -1,0 +1,21 @@
+pre-commit:
+  parallel: true
+  commands:
+    format-check:
+      glob: '*.{ts,tsx,js,json}'
+      run: oxfmt --check {staged_files}
+    lint:
+      glob: '*.{ts,tsx}'
+      run: oxlint {staged_files}
+    rust-fmt:
+      root: 'src-tauri/'
+      glob: '*.rs'
+      run: cargo fmt --check
+
+pre-push:
+  commands:
+    test:
+      run: pnpm vitest run
+    rust-test:
+      root: 'src-tauri/'
+      run: cargo test

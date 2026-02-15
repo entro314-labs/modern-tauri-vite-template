@@ -1,0 +1,8 @@
+node_modules
+dist
+dist-ssr
+src-tauri/target
+.DS_Store
+*.env.local
+src/routeTree.gen.ts
+.lefthook/

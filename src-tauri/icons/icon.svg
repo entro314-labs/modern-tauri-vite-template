@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="tauri-app icon">
+  <rect width="512" height="512" rx="96" fill="#0f172a" />
+  <circle cx="256" cy="256" r="160" fill="#2563eb" />
+  <path d="M256 136 342 290H170z" fill="#eff6ff" />
+</svg>
