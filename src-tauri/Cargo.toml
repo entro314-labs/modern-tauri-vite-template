@@ -5,15 +5,77 @@ description = "A production-ready Tauri 2 scaffold"
 authors = ["community"]
 license = "MIT"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.97.1"
 
 [lib]
 name = "tauri_app_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
+[features]
+default = []
+# Pull in rayon-based parallel helpers (foundations::parallel::initialize_rayon).
+rayon = ["dep:rayon"]
+
 [build-dependencies]
-tauri-build = { version = "2.5.5" }
+tauri-build = { version = "2" }
+
+[target.'cfg(windows)'.build-dependencies]
+embed-resource = "3"
 
 [dependencies]
+# Tauri + serde
 serde = { version = "1", features = ["derive"] }
-tauri = { version = "2.10.2" }
+serde_json = "1"
+serde_yaml = "0.9"
+tauri = { version = "2" }
+
+# Foundations (ported from Ludusavi)
+chrono = { version = "0.4", features = ["serde"] }
+dirs = "6"
+filetime = "0.2"
+flexi_logger = { version = "0.31", features = ["textfilter"], default-features = false }
+globset = "0.4"
+itertools = "0.14"
+log = "0.4"
+opener = "0.8"
+rayon = { version = "1", optional = true }
+reqwest = { version = "0.12", features = [
+  "rustls-tls",
+  "gzip",
+  "blocking",
+], default-features = false }
+sha1 = "0.10"
+shlex = "1"
+typed-path = "0.12"
+which = "8"
+whoami = "1"
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+
+[target.'cfg(unix)'.dependencies]
+signal-hook = "0.3"
+
+[target.'cfg(windows)'.dependencies]
+known-folders = "1"
+windows = { version = "0.62", features = [
+  "Win32_System_Console",
+  "Win32_System_Threading",
+  "Win32_Storage_FileSystem",
+  "Win32_UI_Shell",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+lto = "thin"
+strip = true
+
+[lints.clippy]
+large_enum_variant = "allow"
+new_without_default = "allow"
+too_many_arguments = "allow"

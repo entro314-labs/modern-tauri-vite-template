@@ -63,20 +63,23 @@ function main() {
   checkFileExists('src-tauri/Cargo.toml', 'Rust manifest')
   checkPlatformHints()
 
+  const out = (line) => process.stdout.write(`${line}\n`)
+  const errOut = (line) => process.stderr.write(`${line}\n`)
+
   if (verbose) {
-    console.log(`Platform: ${os.platform()} ${os.arch()} (node ${process.version})`)
-    console.log(`Checks: ${errors.length} error(s), ${warnings.length} warning(s)`)
+    out(`Platform: ${os.platform()} ${os.arch()} (node ${process.version})`)
+    out(`Checks: ${errors.length} error(s), ${warnings.length} warning(s)`)
   }
 
   if (warnings.length > 0) {
     for (const warning of warnings) {
-      console.warn(`⚠ ${warning}`)
+      errOut(`WARN ${warning}`)
     }
   }
 
   if (errors.length > 0) {
     for (const error of errors) {
-      console.error(`✖ ${error}`)
+      errOut(`ERROR ${error}`)
     }
     process.exit(1)
   }

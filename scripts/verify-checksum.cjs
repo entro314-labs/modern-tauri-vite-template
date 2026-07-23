@@ -56,6 +56,8 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err instanceof Error ? err.message : String(err))
+  process.stderr.write(
+    `Checksum verification failed: ${err instanceof Error ? err.message : String(err)}\n`,
+  )
   process.exit(1)
 })

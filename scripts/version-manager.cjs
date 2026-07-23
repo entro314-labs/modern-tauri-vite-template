@@ -83,7 +83,7 @@ function main() {
 
   if (command === 'current' || command === 'info') {
     const version = generateVersion(counter.buildNumber, 'semantic')
-
+    process.stdout.write(`Current version: ${version} (build ${counter.buildNumber})\n`)
     return
   }
 

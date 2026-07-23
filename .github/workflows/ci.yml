@@ -33,6 +33,11 @@ jobs:
       - name: Typed lint
         run: pnpm run lint:typed
 
+      # Fails once the project is renamed but the updater pubkey/endpoints are still the
+      # scaffold placeholders — see scripts/check-updater-config.mjs and docs/UPDATER.md.
+      - name: Updater config guard
+        run: pnpm run check:updater
+
       - name: Knip advisory
         run: pnpm run knip || true
 

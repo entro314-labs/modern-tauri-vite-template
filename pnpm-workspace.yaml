@@ -1,3 +1,12 @@
+allowBuilds:
+  lefthook: true
+minimumReleaseAgeExclude:
+  - knip@6.29.0
+  - '@csstools/css-calc@3.3.0'
+  - '@csstools/css-color-parser@4.1.10'
+  - '@csstools/css-syntax-patches-for-csstree@1.1.7'
+  - baseline-browser-mapping@2.11.1
+  - tinybench@6.1.1
 onlyBuiltDependencies:
   - esbuild
   - lefthook

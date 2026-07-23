@@ -1,10 +1,28 @@
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
+import { Link, Outlet, createRootRoute } from '@tanstack/react-router'
+import { useEffect } from 'react'
 
-import { useAppStore } from '../stores/app.store';
+import { maybeBackgroundCheck } from '../lib/updater'
+import { useAppStore } from '../stores/app.store'
 
 function RootLayout() {
-  const sidebarOpen = useAppStore((state) => state.sidebarOpen);
-  const setSidebarOpen = useAppStore((state) => state.setSidebarOpen);
+  const sidebarOpen = useAppStore((state) => state.sidebarOpen)
+  const setSidebarOpen = useAppStore((state) => state.setSidebarOpen)
+  const addNotification = useAppStore((state) => state.addNotification)
+
+  // Silent startup update check: gated by the updater settings (auto-check toggle + wall-clock
+  // interval + skip/remind suppression), so this is a no-op for most launches.
+  useEffect(
+    function runStartupUpdateCheck() {
+      void maybeBackgroundCheck(({ kind, result }) => {
+        addNotification(
+          kind === 'staged'
+            ? `Update ${result.latestVersion ?? ''} downloaded — installs on next quit.`
+            : `Update ${result.latestVersion ?? ''} available — see Settings.`,
+        )
+      })
+    },
+    [addNotification],
+  )
 
   return (
     <div className="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)]">
@@ -18,7 +36,9 @@ function RootLayout() {
             <span className="text-sm font-semibold">tauri-app</span>
             <button
               type="button"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
+              onClick={() => {
+                setSidebarOpen(!sidebarOpen)
+              }}
               className="rounded border border-[var(--color-border)] px-2 py-1 text-xs"
               aria-label="Toggle sidebar"
             >
@@ -49,11 +69,11 @@ function RootLayout() {
         </main>
       </div>
     </div>
-  );
+  )
 }
 
 export const Route = createRootRoute({
   component: RootLayout,
-});
+})
 
-export const rootRoute = Route;
+export const rootRoute = Route

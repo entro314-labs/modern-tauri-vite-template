@@ -56,6 +56,8 @@ try {
   }
   updateCargoVersion(cargoTomlPath)
 } catch (err) {
-  console.error('Failed to update version:', err instanceof Error ? err.message : String(err))
+  process.stderr.write(
+    `Failed to update version: ${err instanceof Error ? err.message : String(err)}\n`,
+  )
   process.exit(1)
 }

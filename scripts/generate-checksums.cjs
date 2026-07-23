@@ -96,6 +96,8 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('Failed to generate checksums:', err instanceof Error ? err.message : String(err))
+  process.stderr.write(
+    `Failed to generate checksums: ${err instanceof Error ? err.message : String(err)}\n`,
+  )
   process.exit(1)
 })

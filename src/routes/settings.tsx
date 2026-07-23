@@ -1,13 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-import { Button } from '../components/ui/button';
-import { type Theme, useSettingsStore } from '../stores/settings.store';
+import { Button } from '../components/ui/button'
+import { UpdaterCard } from '../components/UpdaterCard'
+import { type Theme, useSettingsStore } from '../stores/settings.store'
 
-const themes: Theme[] = ['light', 'dark', 'system'];
+const themes: Theme[] = ['light', 'dark', 'system']
 
 function SettingsRoute() {
-  const theme = useSettingsStore((state) => state.theme);
-  const setTheme = useSettingsStore((state) => state.setTheme);
+  const theme = useSettingsStore((state) => state.theme)
+  const setTheme = useSettingsStore((state) => state.setTheme)
 
   return (
     <section className="max-w-2xl space-y-4">
@@ -23,19 +24,23 @@ function SettingsRoute() {
             <Button
               key={themeOption}
               variant={theme === themeOption ? 'primary' : 'secondary'}
-              onClick={() => setTheme(themeOption)}
+              onClick={() => {
+                setTheme(themeOption)
+              }}
             >
               {themeOption}
             </Button>
           ))}
         </div>
       </div>
+
+      <UpdaterCard />
     </section>
-  );
+  )
 }
 
 export const Route = createFileRoute('/settings')({
   component: SettingsRoute,
-});
+})
 
-export const settingsRoute = Route;
+export const settingsRoute = Route

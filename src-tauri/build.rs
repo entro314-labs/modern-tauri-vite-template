@@ -1,28 +1,35 @@
-use std::fs;
-use std::path::Path;
-
 fn main() {
-  ensure_icon_png();
-  tauri_build::build()
-}
+  println!("cargo:rerun-if-env-changed=TAURI_APP_NAME");
+  println!("cargo:rerun-if-env-changed=TAURI_APP_VERSION");
 
-fn ensure_icon_png() {
-  let icon_path = Path::new("icons/icon.png");
+  #[cfg(target_os = "windows")]
+  {
+    println!("cargo:rerun-if-changed=assets/windows/manifest.rc");
+    println!("cargo:rerun-if-changed=assets/windows/manifest.xml");
 
-  let Some(parent) = icon_path.parent() else {
-    return;
-  };
+    // Tauri's own manifest already covers WebView DPI for the host binary, but
+    // this manifest adds `longPathAware`, `permonitorv2`, and Common Controls v6
+    // which are not in Tauri's default manifest. Safe to combine.
+    if let Err(e) = embed_resource::compile("assets/windows/manifest.rc", embed_resource::NONE)
+      .manifest_optional()
+    {
+      println!("cargo:warning=failed to embed Windows manifest: {e}");
+    }
+  }
 
-  let _ = fs::create_dir_all(parent);
-
-  // 1x1 transparent PNG.
-  let bytes: [u8; 70] = [
-    0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x08, 0x06, 0x00, 0x00, 0x00, 0x1F, 0x15, 0xC4,
-    0x89, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x44, 0x41, 0x54, 0x78, 0x9C, 0x63, 0xF8, 0xFF, 0xFF, 0xFF,
-    0x7F, 0x00, 0x09, 0xFB, 0x03, 0xFD, 0x05, 0x43, 0x45, 0xCA, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45,
-    0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82,
-  ];
-
-  let _ = fs::write(icon_path, bytes);
+  if let Err(error) = tauri_build::try_build(tauri_build::Attributes::new().app_manifest(
+    tauri_build::AppManifest::new().commands(&[
+      "greet",
+      "get_app_info",
+      "get_app_dir",
+      "get_os",
+      "resolve_path",
+      "check_for_updates",
+      "download_update",
+      "update_install_support",
+      "update_staged",
+    ]),
+  )) {
+    panic!("failed to run tauri build script: {error}");
+  }
 }

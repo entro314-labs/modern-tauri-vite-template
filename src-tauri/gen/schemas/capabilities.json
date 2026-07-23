@@ -1,1 +1,1 @@
-{}
+{"default":{"identifier":"default","description":"Default desktop capability for the main window.","local":true,"windows":["main"],"permissions":["core:default","allow-greet","allow-get-app-info","allow-check-for-updates","allow-download-update","allow-update-install-support","allow-update-staged","process:default"]}}
