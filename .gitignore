@@ -6,3 +6,6 @@ src-tauri/target
 *.env.local
 src/routeTree.gen.ts
 .lefthook/
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts

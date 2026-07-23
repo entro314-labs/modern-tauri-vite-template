@@ -1,0 +1,70 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "singleAttributePerLine": false,
+  "quoteProps": "as-needed",
+  "objectWrap": "preserve",
+  "endOfLine": "lf",
+  "insertFinalNewline": true,
+  "embeddedLanguageFormatting": "auto",
+  "htmlWhitespaceSensitivity": "css",
+  "proseWrap": "preserve",
+  "vueIndentScriptAndStyle": false,
+
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "src-tauri/target",
+    "src-tauri/gen",
+    "pnpm-lock.yaml",
+    "package-lock.json",
+  ],
+
+  "sortImports": {
+    "groups": [
+      "builtin",
+      "external",
+      ["internal", "subpath"],
+      ["parent", "sibling", "index"],
+      "style",
+      "unknown",
+    ],
+    "internalPattern": ["~/", "@/", "#"],
+    "newlinesBetween": true,
+    "order": "asc",
+    "ignoreCase": true,
+    "sortSideEffects": false,
+  },
+
+  "sortPackageJson": true,
+
+  // Uncomment once sortTailwindcss panic bug is resolved:
+  // https://github.com/oxc-project/oxc/issues/19255
+  //
+  // "sortTailwindcss": {
+  //   "stylesheet": "./src/globals.css",
+  //   "functions": ["clsx", "cn", "cva", "tw"]
+  // },
+
+  "overrides": [
+    {
+      "files": ["**/*.md"],
+      "options": {
+        "proseWrap": "preserve",
+        "printWidth": 120,
+      },
+    },
+  ],
+}

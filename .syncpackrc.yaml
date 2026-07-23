@@ -1,0 +1,126 @@
+$schema: https://unpkg.com/syncpack@14.0.1/dist/schema.json
+
+# pnpm-focused, repo-wide config: keep dependencies aligned and ranges consistent.
+indent: '  '
+
+source:
+  - '**/package.json'
+
+customTypes:
+  optional:
+    strategy: versionsByName
+    path: optionalDependencies
+
+sortAz:
+  - contributors
+  - dependencies
+  - devDependencies
+  - peerDependencies
+  - optionalDependencies
+  - resolutions
+  - overrides
+  - pnpm.overrides
+  - pnpm.patchedDependencies
+  - scripts
+  - exports
+  - imports
+  - engines
+  - packageManager
+
+sortFirst:
+  - name
+  - version
+  - description
+  - private
+  - type
+  - packageManager
+  - engines
+  - author
+  - license
+  - keywords
+  - repository
+  - bugs
+  - homepage
+  - funding
+  - publishConfig
+  - scripts
+  - dependencies
+  - devDependencies
+  - peerDependencies
+  - optionalDependencies
+  - bundledDependencies
+  - resolutions
+  - overrides
+  - pnpm
+  - eslintConfig
+  - prettier
+  - browserslist
+
+sortExports:
+  - types
+  - import
+  - require
+  - default
+  - node
+  - browser
+  - react-native
+  - development
+  - production
+
+sortPackages: true
+
+semverGroups:
+  - dependencies:
+      - '**'
+    dependencyTypes:
+      - prod
+      - dev
+      - peer
+    specifierTypes:
+      - '!workspace-protocol'
+      - '!file'
+      - '!url'
+      - '!alias'
+      - '!tag'
+      - '!latest'
+      - '!unsupported'
+    range: '^'
+
+versionGroups:
+  - dependencies:
+      - '$LOCAL'
+    dependencyTypes:
+      - prod
+      - dev
+      - peer
+    pinVersion: 'workspace:*'
+  - dependencies:
+      - '**'
+    packages:
+      - '**'
+    dependencyTypes:
+      - prod
+      - dev
+      - peer
+    specifierTypes:
+      - '!workspace-protocol'
+      - '!file'
+      - '!url'
+      - '!alias'
+      - '!tag'
+      - '!latest'
+      - '!unsupported'
+    preferVersion: highestSemver
+  - dependencyTypes:
+      - prod
+      - dev
+      - peer
+    specifierTypes:
+      - workspace-protocol
+      - file
+      - url
+      - alias
+      - tag
+      - latest
+      - unsupported
+    isIgnored: true
