@@ -80,7 +80,13 @@ function HomeRoute() {
             }}
             className="w-full min-w-48 flex-1 rounded-md border border-[var(--color-border)] bg-[var(--color-background)] px-3 py-2 text-sm"
           />
-          <Button onClick={() => void runGreeting(name)}>Run greet()</Button>
+          <Button
+            onClick={() => {
+              void runGreeting(name)
+            }}
+          >
+            Run greet()
+          </Button>
         </div>
       </div>
 
