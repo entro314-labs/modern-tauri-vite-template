@@ -343,7 +343,13 @@ export function UpdaterCard() {
                 <p className="text-xs opacity-80">
                   It installs automatically when you quit the app — or restart now.
                 </p>
-                <Button onClick={() => void restartToUpdate()}>Restart to Update</Button>
+                <Button
+                  onClick={() => {
+                    void restartToUpdate()
+                  }}
+                >
+                  Restart to Update
+                </Button>
               </div>
             )}
 
