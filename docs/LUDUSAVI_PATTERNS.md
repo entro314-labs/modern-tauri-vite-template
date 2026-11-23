@@ -284,16 +284,16 @@ Pulled into `Cargo.toml`:
 
 ```toml
 [profile.dev]
-opt-level = 1                  # debuggable
+opt-level = 1 # debuggable
 [profile.dev.package."*"]
-opt-level = 3                  # but deps fully optimized
+opt-level = 3 # but deps fully optimized
 
 [profile.release]
 lto = "thin"
 strip = true
 
 [lints.clippy]
-large_enum_variant = "allow"   # large config enums are fine
+large_enum_variant = "allow" # large config enums are fine
 new_without_default = "allow"
 too_many_arguments = "allow"
 ```
