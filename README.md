@@ -1,7 +1,7 @@
 ![CI](https://img.shields.io/github/actions/workflow/status/your-org/tauri-app/ci.yml?branch=main&label=CI)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Tauri](https://img.shields.io/badge/Tauri-2.10.3-24C8DB)
-![Rust](https://img.shields.io/badge/Rust-1.94%2B-orange)
+![Rust](https://img.shields.io/badge/Rust-1.97.1%2B-orange)
 
 ## ✅ Modern stable scaffold
 
@@ -15,7 +15,7 @@ This template is configured around current stable releases and modern defaults:
 
 ## Prerequisites
 
-- Node.js **20.19+** or **22.12+**
+- Node.js **24.19.0+** or **22.12+**
 - `pnpm`
 - Rust stable (MSRV **1.94+** for this template)
 - Platform dependencies for Tauri: https://v2.tauri.app/start/prerequisites/
