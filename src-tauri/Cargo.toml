@@ -35,7 +35,7 @@ dirs = "6"
 filetime = "0.2"
 flexi_logger = { version = "0.32", features = ["textfilter"], default-features = false }
 globset = "0.4"
-itertools = "0.14"
+itertools = "0.15"
 log = "0.4"
 opener = "0.8"
 rayon = { version = "1", optional = true }
