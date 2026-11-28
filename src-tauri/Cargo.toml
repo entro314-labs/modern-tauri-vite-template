@@ -46,7 +46,7 @@ reqwest = { version = "0.12", features = [
 ], default-features = false }
 sha1 = "0.10"
 shlex = "2"
-typed-path = "0.12"
+typed-path = "0.13"
 which = "8"
 whoami = "1"
 tauri-plugin-updater = "2"
